@@ -1,5 +1,6 @@
 from giccinema.services.booking_service import CinemaService
 from giccinema.views.console_view import ConsoleView
+from giccinema.common.message_provider import show_message
 
 
 class CinemaController:
@@ -34,12 +35,13 @@ class CinemaController:
             try:
                 num_tickets = int(num_tickets)
             except ValueError as e:
-                print(f"\nInvalid input. Please enter a valid number.")
-                return
+                show_message("Invalid input. Please enter a valid number.", "failed")
+                continue
 
             if num_tickets > self.cinema.available_seats:
                 print(f"\nSorry, there are only {self.cinema.available_seats} seats available.")
                 continue
+
             booking = self.cinema.make_booking(num_tickets)
             if not booking:
                 print("Not enough seats available. Try again.")
