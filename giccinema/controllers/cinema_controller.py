@@ -1,3 +1,4 @@
+from giccinema.common.strings_manager import StringManager
 from giccinema.services.booking_service import CinemaService
 from giccinema.views.console_view import ConsoleView
 from giccinema.common.message_provider import show_message
@@ -8,45 +9,50 @@ class CinemaController:
         self.cinema = None
 
     def start(self):
-        movie_info = input("Please define movie title and seating map in [Title] [Row] [SeatsPerRow] format:\n> ")
+        movie_info = input(f"{StringManager.MSG_INITIATE}\n> ")
         title, rows, seats = movie_info.rsplit(" ", 2)
         self.cinema = CinemaService(title, int(rows), int(seats))
 
         while True:
-            print(f"\nWelcome to GIC Cinemas")
-            print(f"[1] Book tickets for {self.cinema.movie_title} ({self.cinema.available_seats} seats available)")
-            print("[2] Check bookings")
-            print("[3] Exit")
-            choice = input("Please enter your selection: ").strip()
+            print(f"\n{StringManager.MSG_WELCOME}")
+            print(f"{StringManager.OPTION_ONE.format(self.cinema.movie_title, self.cinema.available_seats)}")
+            print(f"{StringManager.OPTION_TWO}")
+            print(f"{StringManager.OPTION_THREE}")
+
+            choice = input(f"{StringManager.REQUEST_INPUT}").strip()
             if choice == "1":
                 self.handle_booking()
             elif choice == "2":
                 self.handle_check_booking()
             elif choice == "3":
-                print("Thank you for using GIC Cinemas system. Bye!")
+                print(f"{StringManager.MSG_THANK_YOU}")
                 break
+            else:
+                show_message(StringManager.MSG_RETRY, "err")
 
     def handle_booking(self):
         while True:
-            num_tickets = input("Enter number of tickets to book, or enter blank to go back to main menu:\n> ")
+            num_tickets = input(f"{StringManager.TICKET_INPUT}\n> ")
             if not num_tickets:
                 return
 
             try:
                 num_tickets = int(num_tickets)
             except ValueError as e:
-                show_message("Invalid input. Please enter a valid number.", "failed")
+                show_message(f"{StringManager.MSG_INVALID_NUMBER}", "err")
                 continue
 
             if num_tickets > self.cinema.available_seats:
-                print(f"\nSorry, there are only {self.cinema.available_seats} seats available.")
+                show_message(f"{StringManager.MSG_AVAILABLE_SEAT.format(self.cinema.available_seats)}", "err")
                 continue
 
             booking = self.cinema.make_booking(num_tickets)
             if not booking:
-                print("Not enough seats available. Try again.")
+                show_message(f"{StringManager.MSG_BOOKING_FAILED}", "err")
                 continue
-            print(f"Successfully reserved {num_tickets} {self.cinema.movie_title} tickets. Booking id: {booking.id}")
+
+            print(f"{StringManager.MSG_RESERVED.format(num_tickets,self.cinema.movie_title)}")
+            print(f"{StringManager.BOOKING_ID.format(booking.id)}")
             print(self.cinema.get_seating_display(highlight_seats=booking.seats))
 
     def handle_check_booking(self):
