@@ -30,7 +30,13 @@ class CinemaController:
             num_tickets = input("Enter number of tickets to book, or enter blank to go back to main menu:\n> ")
             if not num_tickets:
                 return
-            num_tickets = int(num_tickets)
+
+            try:
+                num_tickets = int(num_tickets)
+            except ValueError as e:
+                print(f"\nInvalid input. Please enter a valid number.")
+                return
+
             if num_tickets > self.cinema.available_seats:
                 print(f"\nSorry, there are only {self.cinema.available_seats} seats available.")
                 continue
