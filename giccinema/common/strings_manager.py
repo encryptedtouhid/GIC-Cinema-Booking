@@ -10,10 +10,10 @@ class StringManager:
     MSG_THANK_YOU = "Thank you for using GIC Cinemas system. Bye!"
     MSG_RESERVED = "Successfully reserved {0} {1} tickets."
     BOOKING_ID = "Booking ID: {0}"
-
+    SCREEN = "SCREEN"
+    CONFIRMED_TEXT = "confirmed."
 
     BOOKING_ID_INPUT = "Enter booking ID or enter blank to go back to main menu:"
-    CONFIRMED_TEXT = "confirmed."
     MSG_ACCEPT_OR_BLANK = "Enter blank to accept seat selection, or enter new seating position:"
     MSG_AVAILABLE_SEAT = "Sorry, there are only {0} seats available."
     MSG_BOOKING_FAILED = "Booking failed. Please try again!"
@@ -25,5 +25,4 @@ class StringManager:
     MSG_SELECTED_SEAT = "Selected seats:"
     REQUEST_INPUT = "Please enter your selection:"
     RETURN_TO_MENU = "Returning to main menu."
-    SCREEN = "SCREEN"
     TICKET_INPUT = "Enter number of tickets to book, or enter blank to go back to main menu:"

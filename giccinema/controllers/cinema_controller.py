@@ -58,12 +58,12 @@ class CinemaController:
             while True:
                 new_choice = input(f"\n{StringManager.MSG_ACCEPT_OR_BLANK}").strip()
                 if not new_choice:
-                    print(f"\nBooking id: {booking.id} confirmed.")
+                    print(f"\n{StringManager.BOOKING_ID.format(booking.id)} {StringManager.CONFIRMED_TEXT}")
                     return
 
                 rebooked = self.cinema.try_rebook_seats(booking, new_choice)
                 if rebooked:
-                    print(f"\nBooking id: {booking.id}")
+                    print(f"\n{StringManager.BOOKING_ID.format(booking.id)}")
                     print(self.cinema.get_seating_display(highlight_seats=booking.seats))
                 else:
                     show_message(StringManager.MSG_INVALID_SEAT, "err")
