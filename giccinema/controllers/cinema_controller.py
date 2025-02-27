@@ -38,7 +38,7 @@ class CinemaController:
 
             try:
                 num_tickets = int(num_tickets)
-            except ValueError as e:
+            except ValueError:
                 show_message(f"{StringManager.MSG_INVALID_NUMBER}", "err")
                 continue
 
@@ -51,18 +51,20 @@ class CinemaController:
                 show_message(f"{StringManager.MSG_BOOKING_FAILED}", "err")
                 continue
 
-            print(f"{StringManager.MSG_RESERVED.format(num_tickets,self.cinema.movie_title)}")
+            print(f"{StringManager.MSG_RESERVED.format(num_tickets, self.cinema.movie_title)}")
             print(f"{StringManager.BOOKING_ID.format(booking.id)}")
             print(self.cinema.get_seating_display(highlight_seats=booking.seats))
 
-    def handle_check_booking(self):
-        while True:
-            booking_id = input("Enter booking ID, or enter blank to go back to main menu:\n> ")
-            if not booking_id:
-                return
-            seats = self.cinema.check_booking(booking_id)
-            if not seats:
-                print("Booking ID not found.")
-            else:
-                print(f"Booking id: {booking_id}")
-                print(self.cinema.get_seating_display(highlight_seats=seats))
+            while True:
+                new_choice = input(f"\n{StringManager.MSG_ACCEPT_OR_BLANK}").strip()
+                if not new_choice:
+                    print(f"\nBooking id: {booking.id} confirmed.")
+                    return
+
+                rebooked = self.cinema.try_rebook_seats(booking, new_choice)
+                if rebooked:
+                    print(f"\nBooking id: {booking.id}")
+                    print(self.cinema.get_seating_display(highlight_seats=booking.seats))
+                else:
+                    show_message(StringManager.MSG_INVALID_SEAT, "err")
+
