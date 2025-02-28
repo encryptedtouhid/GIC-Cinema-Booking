@@ -1,5 +1,5 @@
-from giccinema.controllers.cinema_controller import CinemaController
+from giccinema.core.application import Application
 
 if __name__ == "__main__":
-    controller = CinemaController()
-    controller.start()
+    app = Application()
+    app.run()
