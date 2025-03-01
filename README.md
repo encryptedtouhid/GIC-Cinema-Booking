@@ -138,6 +138,7 @@ The application includes a comprehensive test suite covering all components.
 To run the entire test suite:
 
 ```bash
+pip install pytest
 pytest tests/
 ```
 
