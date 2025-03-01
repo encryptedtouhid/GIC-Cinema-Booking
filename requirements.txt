@@ -1,0 +1,2 @@
+giccinema~=0.1.0
+setuptools~=68.2.0

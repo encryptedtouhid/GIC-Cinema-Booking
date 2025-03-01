@@ -99,8 +99,23 @@ cinema_booking_system/
 
 ```bash
 git clone https://github.com/encryptedtouhid/GIC-Cinema-Booking.git
-cd gic-cinemas-booking
+cd GIC-Cinema-Booking
 ```
+
+2. Install the package in development mode:
+
+```bash
+pip install -e .
+```
+
+Alternatively, you can add the project root to your Python path:
+
+```bash
+export PYTHONPATH=$PYTHONPATH:/path/to/GIC-Cinema-Booking
+# On Windows:
+# set PYTHONPATH=%PYTHONPATH%;C:\path\to\GIC-Cinema-Booking
+```
+
 
 2. No additional package installation is required as the project uses only built-in libraries.
 
@@ -141,3 +156,20 @@ The test suite includes:
 - Unit tests for all models, services
 
 
+
+## Package Setup (For Development)
+
+If you want to develop this package, you should create a `setup.py` file in the root directory:
+
+```python
+from setuptools import setup, find_packages
+
+setup(
+    name="giccinema",
+    version="0.1.0",
+    packages=find_packages(),
+    install_requires=[],
+    python_requires=">=3.9",
+)
+```
+This will allow you to install the package in development mode using `pip install -e .`
