@@ -137,10 +137,6 @@ The application includes a comprehensive test suite covering all components.
 
 To run the entire test suite:
 
-```bash
-python -m unittest discover tests
-```
-
 ### Running Specific Tests
 
 To run tests for a specific module:
