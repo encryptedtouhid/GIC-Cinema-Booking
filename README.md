@@ -137,6 +137,10 @@ The application includes a comprehensive test suite covering all components.
 
 To run the entire test suite:
 
+```bash
+pytest tests/
+```
+
 ### Running Specific Tests
 
 To run tests for a specific module:
@@ -144,7 +148,6 @@ To run tests for a specific module:
 ```bash
 python -m unittest tests/test_models/test_movie.py
 ```
-
 
 ### Test Coverage
 
