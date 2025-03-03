@@ -57,36 +57,6 @@ cinema_booking_system/
 └── main.py                    # Application entry point
 ```
 
-## Design Patterns and Principles
-
-### SOLID Principles Implementation
-
-1. **Single Responsibility Principle**:
-   - Each class has one specific responsibility
-   - For example: `BookingService` handles bookings, `DisplayService` handles UI display
-
-2. **Open/Closed Principle**:
-   - Components are designed for extension without modification
-   - New seating strategies could be added by extending the `SeatAllocationService`
-
-3. **Liskov Substitution Principle**:
-   - Classes are designed so subtypes can be used in place of parent types
-
-4. **Interface Segregation Principle**:
-   - Services have focused interfaces with specific purposes
-   - No class implements methods it doesn't use
-
-5. **Dependency Inversion Principle**:
-   - High-level modules depend on abstractions
-   - Dependencies are injected rather than created internally
-
-### Design Patterns
-
-- **Service Layer Pattern**: Separates business logic into dedicated service classes
-- **Repository Pattern**: Used in `BookingService` for managing bookings
-- **Strategy Pattern**: Implemented in seat allocation for different selection strategies
-- **Dependency Injection**: Components receive their dependencies rather than creating them
-
 ## Setup Instructions
 
 ### Prerequisites
